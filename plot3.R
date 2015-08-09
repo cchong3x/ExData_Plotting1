@@ -14,18 +14,19 @@ rm(myData)
 dateTime <- paste(newData$Date, newData$Time)
 newData$dateTime <- strptime(dateTime, "%d/%m/%Y %H:%M:%S")
 
-# Step-4: Generate Plot 3
+# Step-4: Control image dimensions 
+png("plot3.png", width = 480, height = 480)
+
+# Step-5: Generate Plot 3
 plot(newData$dateTime, newData$Sub_metering_1, type = "l",
      xlab = "", ylab = "Energy sub metering") 
 
-# Step-5: Add additional lines 
+# Step-6: Add additional lines 
 lines(newData$dateTime, newData$Sub_metering_2, type = "l", col = "red")
 lines(newData$dateTime, newData$Sub_metering_3, type = "l", col = "blue")
 
-# Step-6: Add the legends 
-legend("topright", col = c("black", "red", "blue"), lty = 1, lwd = 1, 
+# Step-7: Add the legends 
+legend("topright", col = c("black", "red", "blue"), lty = 1, lwd = 2,
        legend = c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"))
 
-# Step-7: Saving to PNG file
-dev.copy(png, file="plot3.png", height = 480, width = 480)
 dev.off()

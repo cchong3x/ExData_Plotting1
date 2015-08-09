@@ -14,34 +14,35 @@ rm(myData)
 dateTime <- paste(newData$Date, newData$Time)
 newData$dateTime <- strptime(dateTime, "%d/%m/%Y %H:%M:%S")
 
-# Step-4: Mutiple Base Plots
+# Step-4: Control image dimensions 
+png("plot4.png", width = 480, height = 480)
+
+# Step-5: Mutiple Base Plots
 par(mfrow = c(2, 2))
 with(newData, {
-        # Step-4A: Top Left  
+        # Step-5A: Top Left  
         plot(newData$dateTime, newData$Global_active_power, type = "l",
              xlab = "", ylab = "Global Active Power") 
         
-        # Step-4B: Top Right 
+        # Step-5B: Top Right 
         plot(newData$dateTime, newData$Voltage, type = "l",
              xlab = "datetime", ylab = "Voltage") 
         
-        # Step-4C: Bottom Left 
+        # Step-5C: Bottom Left 
         plot(newData$dateTime, newData$Sub_metering_1, type = "l",
              xlab = "", ylab = "Energy sub metering") 
         
-        # Step-4C: Add additional lines
+        # Step-5C: Add additional lines
         lines(newData$dateTime, newData$Sub_metering_2, type = "l", col = "red")
         lines(newData$dateTime, newData$Sub_metering_3, type = "l", col = "blue")
         
-        # Step-4C: Add the legends 
+        # Step-5C: Add the legends 
         legend("topright", lty = 1, bty = "n", col = c("black", "red", "blue"),
                legend = c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"))
         
-        # Step-4D: Bottom Right 
+        # Step-5D: Bottom Right 
         plot(newData$dateTime, newData$Global_reactive_power, type = "l",
              xlab = "datetime", ylab = "Global_reactive_power") 
 } )
 
-# Step-5: Saving to PNG file
-dev.copy(png, file="plot4.png", height = 480, width = 480)
 dev.off()
